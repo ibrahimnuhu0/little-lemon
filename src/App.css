@@ -41,6 +41,12 @@ body {
   font-weight: bold;
 }
 
+.nav li a:hover {
+  color: #555;
+  text-decoration: underline;
+}
+
+
 .main {
   display: flex;
   flex-direction: column;
