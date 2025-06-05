@@ -1,8 +1,14 @@
 function Main() {
   return (
-    <main>
-      <h1>Welcome to Little Lemon</h1>
-      <p>Delicious food served fresh daily.</p>
+    <main className="main">
+     <section className="section">
+        <h2>Reserve a Table</h2>
+        {}
+      </section>
+
+      <section className="section">
+        <img src="your-image.jpg" alt="Restaurant interior" style={{ width: '100%' }} />
+      </section>
     </main>
   );
 }
