@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../styles/BookingForm.css';
 
 function BookingForm({ availableTimes, dispatchTimes, submitForm }) {
@@ -11,71 +11,81 @@ function BookingForm({ availableTimes, dispatchTimes, submitForm }) {
     const selectedDate = e.target.value;
     setDate(selectedDate);
     dispatchTimes({ date: selectedDate });
-    setTime(''); 
+    setTime('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const bookingData = { date, time, guests, occasion };
-    submitForm(bookingData); 
+    submitForm(bookingData);
   };
 
-  useEffect(() => {
-    if (!date) {
-      setTime('');
-      setGuests(1);
-      setOccasion('');
-    }
-  }, [date]);
-
   return (
-    <form className="booking-form" onSubmit={handleSubmit}>
-      <label htmlFor="res-date">Choose date</label>
-      <input
-        type="date"
-        id="res-date"
-        value={date}
-        onChange={handleDateChange}
-        required
-      />
+    <form className="booking-form" onSubmit={handleSubmit} aria-label="Booking Form">
+      <fieldset className="form-grid">
+        <legend>Booking Information</legend>
 
-      <label htmlFor="res-time">Choose time</label>
-      <select
-        id="res-time"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-        required
-      >
-        <option value="">--Select Time--</option>
-        {availableTimes.map((t) => (
-          <option key={t} value={t}>{t}</option>
-        ))}
-      </select>
+        <div className="form-group">
+          <label htmlFor="res-date">Choose date</label>
+          <input
+            type="date"
+            id="res-date"
+            value={date}
+            onChange={handleDateChange}
+            required
+            aria-required="true"
+          />
+        </div>
 
-      <label htmlFor="guests">Number of guests</label>
-      <input
-        type="number"
-        id="guests"
-        value={guests}
-        onChange={(e) => setGuests(parseInt(e.target.value))}
-        min="1"
-        max="10"
-        required
-      />
+        <div className="form-group">
+          <label htmlFor="res-time">Choose time</label>
+          <select
+            id="res-time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            required
+            aria-required="true"
+          >
+            <option value="">-- Select Time --</option>
+            {availableTimes.map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
 
-      <label htmlFor="occasion">Occasion</label>
-      <select
-        id="occasion"
-        value={occasion}
-        onChange={(e) => setOccasion(e.target.value)}
-        required
-      >
-        <option value="">--Select Occasion--</option>
-        <option value="Birthday">Birthday</option>
-        <option value="Anniversary">Anniversary</option>
-      </select>
+        <div className="form-group">
+          <label htmlFor="guests">Number of guests</label>
+          <input
+            type="number"
+            id="guests"
+            value={guests}
+            onChange={(e) => setGuests(parseInt(e.target.value))}
+            min="1"
+            max="10"
+            required
+            aria-required="true"
+          />
+        </div>
 
-      <input type="submit" value="Make Your reservation" />
+        <div className="form-group">
+          <label htmlFor="occasion">Occasion</label>
+          <select
+            id="occasion"
+            value={occasion}
+            onChange={(e) => setOccasion(e.target.value)}
+            required
+            aria-required="true"
+          >
+            <option value="">-- Select Occasion --</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+          </select>
+        </div>
+
+        <div className="form-group full-width">
+          <button type="submit" aria-label="On Click">Make Your Reservation</button>
+        </div>
+      </fieldset>
     </form>
   );
 }
