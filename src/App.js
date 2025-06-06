@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './Header'; // ✅ Import Header instead of Nav
+import Header from './Header'; 
 import Footer from './Footer';
 import HomePage from './HomePage';
-import BookingPage from './BookingPage';
+import Main from './Main';
 import './App.css';
+import ConfirmedBooking from './components/ConfirmedBooking';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
         <Header /> 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/booking" element={<Main />} />
+          <Route path="/confirmed" element={<ConfirmedBooking />} /> 
         </Routes>
         <Footer />
       </div>
